@@ -1,0 +1,21 @@
+*.js
+*.d.ts
+node_modules
+
+# Lint config
+!.eslintrc.js
+
+# CDK asset staging directory
+.cdk.staging
+cdk.out
+
+# CDK context
+cdk.context.json
+
+# Web
+dist
+.parcel-cache
+.env.local
+
+# Local configuration
+local.ts

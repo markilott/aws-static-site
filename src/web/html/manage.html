@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en" class="h-100">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Manage Registration</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        crossorigin="anonymous">
+
+    <!-- Site CSS -->
+    <link href="../css/default.css" rel="stylesheet">
+</head>
+
+<body class="d-flex h-100 text-center text-white bg-dark">
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+
+        <header class="mb-5">
+            <div>
+                <h3 class="float-md-start mb-0">Manage</h3>
+                <nav class="nav nav-masthead justify-content-center float-md-end">
+                    <a class="nav-link" href="./index.html">Home</a>
+                    <a class="nav-link" href="./register.html">Register</a>
+                    <a class="nav-link active" aria-current="page" href="#">Manage</a>
+                    <a class="nav-link" href="./about.html">About</a>
+                </nav>
+            </div>
+        </header>
+
+        <main class="px-3">
+
+            <!-- Query block -->
+            <div class="row align-items-center g-lg-5 py-5 mt-5" id="queryBlock">
+                <div class="col-lg-7 text-center text-lg-start">
+                    <h1 class="display-4 fw-bold lh-1 mb-3">Already registered your interest?</h1>
+                    <p class="col-lg-10 fs-4">We obviously don't have room for everyone - check if you are one of the
+                        chosen few here.</p>
+                </div>
+                <div class="col-md-10 mx-auto col-lg-5">
+                    <div class="d-none py-1" id="invalidQueryAlert">
+                        <div class="alert alert-warning text-left text-lg-start" role="alert">
+                            <span id="invalidQueryMsg"></span><br>
+                        </div>
+                    </div>
+                    <form class="p-4 p-md-5 border rounded-3 bg-light text-dark" id="queryForm">
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control" id="queryEmail" placeholder="name@example.com"
+                                name="email">
+                            <label for="queryEmail">Email address</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="queryReference" placeholder="Reference Code"
+                                name="reference">
+                            <label for="queryReference">Reference code</label>
+                        </div>
+                        <button class="w-100 btn btn-lg btn-primary" type="submit">Get Registration</button>
+                        <hr class="my-4">
+                        <small class="text-muted">Enter your email address or reference code to check your
+                            registration.</small>
+                        <p><small class="text-muted">Not registered? <a href="./register.html">Click here</a> to
+                                register your interest.</small></p>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Update block -->
+            <div class="row align-items-center g-lg-5 py-5 mt-5 d-none" id="updateBlock">
+                <div class="col-lg-7 text-center text-lg-start">
+                    <h1 class="display-4 fw-bold lh-1 mb-3">Update your registration here.</h1>
+                    <p class="col-lg-10 fs-4">You can choose a new date if the current booking isn't working for you, or in the unlikely event you want to delete your registration.</p>
+                </div>
+                <div class="col-md-10 mx-auto col-lg-5">
+                    <div class="d-none py-1" id="invalidUpdateAlert">
+                        <div class="alert alert-warning text-left text-lg-start" role="alert">
+                            <span id="invalidUpdateMsg"></span><br>
+                        </div>
+                    </div>
+                    <form class="p-4 p-md-5 border rounded-3 bg-light text-dark" id="updateForm">
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control" id="updateEmail"
+                                readonly name="email">
+                            <label for="updateEmail">Email address</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="updateReference"
+                                readonly name="reference">
+                            <label for="updateReference">Reference code</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="date" class="form-control" id="registerDate"
+                                name="registerDate">
+                            <label for="registerDate">Preferred Date</label>
+                        </div>
+                        <button class="w-45 btn btn-lg btn-primary px-4 me-md-2" type="submit" id="submitButton">Update</button>
+                        <button class="w-45 btn btn-lg btn-outline-secondary px-4" type="submit" id="deleteButton">Delete</button>
+                        <hr class="my-4">
+                        <small class="text-muted">Select a new date for your registration. Good luck!</small>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Result block -->
+            <div class="row align-items-center g-lg-5 py-5 mt-5 d-none" id="resultBlock">
+                <div class="col-lg-7 text-center text-lg-start" id="queryResultBlock">
+                    <h1 class="display-4 fw-bold lh-1 mb-3"><span id="resultHeader">Your registration is confirmed!</span></h1>
+                    <p class="col-lg-10 fs-4"><span id="resultMsg">We look forward to welcoming you to our event, but should you need to modify your registration you can do so now.</span></p>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                        <button type="button" class="btn btn-primary btn-lg px-4 me-md-2" id="updateButton">Update Registration</button>
+                    </div>
+                </div>
+                <div class="col-lg-7 text-center text-lg-start" id="updateResultBlock">
+                    <h1 class="display-4 fw-bold lh-1 mb-3"><span id="resultHeader">Your request has been noted!</span></h1>
+                    <p class="col-lg-10 fs-4"><span id="resultMsg">We will discuss internally and circle back to you when we have a decision.</span></p>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                        <button type="button" class="btn btn-outline-secondary btn-lg px-4 me-md-2" onclick="window.location.reload()">Manage Registration</button>
+                        <button type="button" class="btn btn-outline-secondary btn-lg px-4" onclick="window.location.href='./register.html';">New Registration</button>
+                    </div>
+                </div>
+                <div class="col-md-10 mx-auto col-lg-5">
+                    <div class="d-flex justify-content-center py-2" id="queryDetail">
+                        <div class="alert alert-primary text-left text-lg-start" role="alert">
+                            Registration Details:<br>
+                            <strong>Name: </strong><span id="nameSpan"></span><br>
+                            <strong>Email: </strong><span id="emailSpan"></span><br>
+                            <strong>Reference: </strong><span id="referenceSpan"></span><br>
+                            <strong>Date: </strong><span id="dateSpan"></span><br>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center py-2" id="updateDetail">
+                        <div class="alert alert-success text-left text-lg-start" role="alert">
+                            Your registration request has been received:<br>
+                            <strong>New Reference: </strong><span id="updateReferenceSpan"></span><br>
+                            <strong>New Date: </strong><span id="updateDateSpan"></span>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center py-2 d-none" id="errorDetail">
+                        <div class="alert alert-warning" role="alert">
+                            Sorry, there was an error with the update:<br>
+                            <span id="msgErrorSpan"></span><br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Page scripts -->
+    <script type="module" src="../ts/register.ts" defer></script>
+</body>
+
+</html>

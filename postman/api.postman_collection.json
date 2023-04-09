@@ -1,0 +1,230 @@
+{
+	"info": {
+		"_postman_id": "01988fcd-564b-46a5-b408-de3f8766befb",
+		"name": "Static Web Site",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16551021"
+	},
+	"item": [
+		{
+			"name": "Create Registration",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const moment = require('moment');\r",
+							"const newDate = moment().add(1, 'days').format('YYYY-MM-DD');\r",
+							"pm.collectionVariables.set('registerDate', newDate);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const response = pm.response.json();\r",
+							"const statusCode = pm.response.code;\r",
+							"\r",
+							"if (statusCode === 200) {\r",
+							"    pm.collectionVariables.set('reference', response.data.reference);\r",
+							"    pm.collectionVariables.set('testEmail', response.data.email);\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"{{$randomEmail}}\",\r\n    \"name\": \"{{$randomFullName}}\",\r\n    \"registerDate\": \"{{registerDate}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/register",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Registration",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const moment = require('moment');\r",
+							"const newDate = moment().add(7, 'days').format('YYYY-MM-DD');\r",
+							"pm.collectionVariables.set('registerDate', newDate);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const response = pm.response.json();\r",
+							"const statusCode = pm.response.code;\r",
+							"\r",
+							"if (statusCode === 200) {\r",
+							"    pm.collectionVariables.set('reference', response.data.reference);\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"{{testEmail}}\",\r\n    \"registerDate\": \"{{registerDate}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/register",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Registration by Email",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/register?email={{testEmail}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"register"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "{{testEmail}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Registration by Reference",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/register?reference={{reference}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"register"
+					],
+					"query": [
+						{
+							"key": "reference",
+							"value": "{{reference}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Registration",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/register?email={{testEmail}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"register"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "{{testEmail}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://api.mydomain.com",
+			"type": "string"
+		},
+		{
+			"key": "testEmail",
+			"value": "myuser@example.com",
+			"type": "string"
+		},
+		{
+			"key": "registerDate",
+			"value": "xx",
+			"type": "string"
+		},
+		{
+			"key": "reference",
+			"value": "xx",
+			"type": "string"
+		}
+	]
+}
